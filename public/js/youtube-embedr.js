@@ -1,10 +1,5 @@
 'use strict';
 
-// Utilies, $200 each
-function __toInt(str) {
-  return parseInt(str, 10)
-}
-
 // Global Strings
 var iframeString = 
 '<iframe ' +
@@ -47,12 +42,12 @@ YoutubeEmbedr.prototype.setSize = function() {
   var _elem = this.elem
   
   // If no height was set, use the ratio to calculate it
-  if (_elem.css('height') === '0px')
-    _elem.css('height', __toInt(_elem.css('width')) * this.ratio[1]/this.ratio[0] + 'px')
+  if (_elem.height() === 0)
+    _elem.height(_elem.width() * this.ratio[1]/this.ratio[0] + 'px')
 
   // If no width was set, calculate one
-  else if (_elem.css('width') === '0px')
-    _elem.css('width', __toInt(_elem.css('height')) * this.ratio[0]/this.ratio[1] + 'px')
+  else if (_elem.width() === 0)
+    _elem.width(_elem.height() * this.ratio[0]/this.ratio[1] + 'px')
 }
 
 YoutubeEmbedr.prototype.setDefaultBgImage = function() {

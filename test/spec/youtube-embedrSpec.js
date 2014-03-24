@@ -1,28 +1,24 @@
-describe('My __toInt function', function() {
-  it('should convert a string number to an int', function() {
-    expect(__toInt('5px')).toEqual(5);
-  });
-
-  it('should return NaN for an unparsable string', function() {
-    expect(__toInt('paul')).toBeNaN();
-  });
-});
-
-describe('My Youtube Embedr Class with height and width set', function() {
+describe('My Youtube Embedr Class', function() {
 
   var ytE;
   var youtubeId = '12345';
-  var height = '300px';
-  var width = '500px';
+  var height;
+  var width;
 
   // Create the element
   var elem = $(document.createElement('div'))
                .addClass('youtube')
                .attr('id', youtubeId)
-               .css('height', height)
-               .css('width', width);
 
   ytE = new YoutubeEmbedr(elem);
+
+  beforeEach(function() {
+    width = '500px';
+    elem.css('width', width);
+
+    height = '360px';
+    elem.css('height', height);
+  });
 
 
   // Setup of the element
@@ -56,9 +52,27 @@ describe('My Youtube Embedr Class with height and width set', function() {
     expect(elem.css('background-image')).toContain('http://i.ytimg.com');
     expect(elem.css('background-image')).toContain(youtubeId);
   });
-  it('should be set the correct size', function() {
+  it('should be set the correct size when height and width are specified', function() {
     ytE.setSize();
     expect(elem.css('height')).toEqual(height);
+    expect(elem.css('width')).toEqual(width);
+  });
+  it('should be set the correct size when only height specified', function() {
+    elem.css('width', '0px');
+    expect(elem.css('width')).toEqual('0px');
+    ytE.setSize();
+
+    var newSize = elem.height() * 16 / 9;
+    expect(elem.css('height')).toEqual(height);
+    expect(elem.css('width')).toEqual(newSize + 'px');
+  });
+  it('should be set the correct size when only width specified', function() {
+    elem.css('height', '0px');
+    expect(elem.css('height')).toEqual('0px');
+    ytE.setSize();
+
+    var newSize = elem.width() * 9 / 16;
+    expect(elem.css('height')).toEqual(newSize + 'px');
     expect(elem.css('width')).toEqual(width);
   });
   it('should add the play button', function() {
