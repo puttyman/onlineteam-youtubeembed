@@ -28,14 +28,17 @@ var YoutubeEmbedr = function(elem) {
         _this.addTitleBar(data.entry.title.$t)
       })
       .fail(function() {
-        throw('Error loading youtube title')
+        if (window.console)
+          console.error('Error loading youtube title: ' + _this.getId())
       })
       .always(function() {
         _this.setClick()
       })
-  }
-  
-  
+  } 
+}
+
+YoutubeEmbedr.prototype.getId = function() {
+  return this.elem.attr('id');
 }
 
 YoutubeEmbedr.prototype.setSize = function() {
@@ -51,7 +54,7 @@ YoutubeEmbedr.prototype.setSize = function() {
 }
 
 YoutubeEmbedr.prototype.setDefaultBgImage = function() {
-  this.bgUrl = 'http://i.ytimg.com/vi/'+this.elem.attr('id')+'/hqdefault.jpg'
+  this.bgUrl = 'http://i.ytimg.com/vi/' + this.getId() + '/hqdefault.jpg'
   this.elem.css('background-image', 'url(' + this.bgUrl + ')')
 }
 
@@ -61,7 +64,7 @@ YoutubeEmbedr.prototype.addPlayButton = function() {
 
 YoutubeEmbedr.prototype.getTitleBarText = function() {
   return $.ajax({
-    url: 'http://gdata.youtube.com/feeds/api/videos/' + this.elem.attr('id') + '?v=2&fields=id,title&alt=json',
+    url: 'http://gdata.youtube.com/feeds/api/videos/' + this.getId() + '?v=2&fields=id,title&alt=json',
     dataType: 'jsonp'
   })
 }
