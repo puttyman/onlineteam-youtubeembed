@@ -58,6 +58,16 @@ describe('My Youtube Embedr Class', function() {
 
   // The individual unit tests for each function
   describe('Testing of functions', function() {
+    it('should return the id of the element', function() {
+      expect(ytE.getId()).toEqual(youtubeId);
+    });
+    it('should show the title when the attr is not set', function() {
+      expect(ytE.hideTitle()).toBe(false);
+    });
+    it('should hide the title when the attr is set', function() {
+      elem.attr('data-title', 'false');
+      expect(ytE.hideTitle()).toBe(true);
+    });
     it('should be set the background image', function() {
       ytE.setDefaultBgImage();
       expect(elem.css('background-image')).toContain('http://i.ytimg.com');
@@ -98,7 +108,7 @@ describe('My Youtube Embedr Class', function() {
     });
     it('should set the title bar', function() {
       ytE.addTitleBar(text);
-      expect(elem.find('.text')[0]).toBeDefined();
+      expect(elem.find('.text').length).toEqual(1);
       expect(elem.find('.text').html()).toContain('Paul Rocks');
       expect(elem.find('.text').attr('target')).toEqual('_blank');
       expect(elem.find('.text').attr('href')).toContain(youtubeId);
@@ -128,6 +138,8 @@ describe('My Youtube Embedr Class', function() {
         return d.promise();
       });
       spyOn(ytE, 'setClick');
+
+      ytE.run();
     });
 
     afterEach(function() {
@@ -135,29 +147,60 @@ describe('My Youtube Embedr Class', function() {
     });
 
     it('should have set the size', function() {
-      ytE.run();
       expect(elem.css('height')).toEqual(height);
       expect(elem.css('width')).toEqual(width);
     });
     it('should have set background the image', function() {
-      ytE.run();
       expect(elem.css('background-image')).toContain('http://i.ytimg.com');
       expect(elem.css('background-image')).toContain(youtubeId);
     });
     it('should have added the play button', function() {
-      ytE.run();
       expect(elem.find('.play').length).toEqual(1);
     });
     it('should have added the title bar text', function() {
-      ytE.run();
       expect(elem.find('.text').html()).toEqual('Paul Rocks');
     });
     it('should have set the click', function() {
-      ytE.run();
       expect(ytE.setClick).toHaveBeenCalled();
     });
     it('should have set the click even if get failed', function() {
+      expect(ytE.setClick).toHaveBeenCalled();
+    });
+  });
+
+
+  // The run function when data-title = false
+  describe('A run with no title', function() {
+
+    beforeEach(function() {
+      spyOn(ytE, 'getTitleBarText');
+      spyOn(ytE, 'setClick');
+
+      elem.attr('data-title', 'false');
+
       ytE.run();
+    });
+
+    afterEach(function() {
+      delete ytE;
+    });
+
+    it('should have set the size', function() {
+      expect(elem.css('height')).toEqual(height);
+      expect(elem.css('width')).toEqual(width);
+    });
+    it('should have set background the image', function() {
+      expect(elem.css('background-image')).toContain('http://i.ytimg.com');
+      expect(elem.css('background-image')).toContain(youtubeId);
+    });
+    it('should have added the play button in the right posishhh', function() {
+      expect(elem.find('.play').length).toEqual(1);
+      expect(elem.find('.play').attr('style')).toContain('top: 50%');
+    });
+    it('should have not try and load a title', function() {
+      expect(ytE.getTitleBarText).not.toHaveBeenCalled();
+    });
+    it('should have set the click', function() {
       expect(ytE.setClick).toHaveBeenCalled();
     });
   });
@@ -177,6 +220,8 @@ describe('My Youtube Embedr Class', function() {
       console.error = function() {
         return;
       }
+
+      ytE.run();
     });
 
     afterEach(function() {
@@ -184,25 +229,20 @@ describe('My Youtube Embedr Class', function() {
     });
 
     it('should have set the size', function() {
-      ytE.run();
       expect(elem.css('height')).toEqual(height);
       expect(elem.css('width')).toEqual(width);
     });
     it('should have set background the image', function() {
-      ytE.run();
       expect(elem.css('background-image')).toContain('http://i.ytimg.com');
       expect(elem.css('background-image')).toContain(youtubeId);
     });
     it('should have added the play button', function() {
-      ytE.run();
       expect(elem.find('.play').length).toEqual(1);
     });
     it('should have added the title bar text', function() {
-      ytE.run();
       expect(elem.find('.text').length).toEqual(0);
     });
     it('should have set the click', function() {
-      ytE.run();
       expect(ytE.setClick).toHaveBeenCalled();
     });
   });

@@ -12,6 +12,11 @@ var iframeString =
  'allowfullscreen ' +
 '></iframe>'
 
+// Lets be uber careful with this :(, I would like to avoid this, but have
+// no idea how YouTube decides when to autoplay or not :/
+var deviceRegex = /iPhone|iPod|iPad|Android|BlackBerry/i
+var mobileBrowser = window.navigator.userAgent.match(deviceRegex);
+
 // The YoutubeEmbedr Class
 var YoutubeEmbedr = function(elem) {
   var _this = this
@@ -21,8 +26,16 @@ var YoutubeEmbedr = function(elem) {
 
   _this.run = function() {
     _this.setSize()
+    // TODO - if - else here for custom/default bg
     _this.setDefaultBgImage()
     _this.addPlayButton()
+
+    if (_this.hideTitle()) {
+      return;
+    }
+
+    // TODO - Add custom title here...
+
     _this.getTitleBarText()
       .then(function(data) {
         _this.addTitleBar(data.entry.title.$t)
@@ -35,6 +48,15 @@ var YoutubeEmbedr = function(elem) {
         _this.setClick()
       })
   } 
+}
+
+YoutubeEmbedr.prototype.hideTitle = function() {
+  if (this.elem.attr('data-title') === 'false') {
+    this.setClick();
+    this.elem.find('.play').css('top', '50%')
+    return true;
+  }
+  return false;
 }
 
 YoutubeEmbedr.prototype.getId = function() {
@@ -74,10 +96,10 @@ YoutubeEmbedr.prototype.addTitleBar = function(text) {
   this.elem.find('.text').slideDown()
 }
 
-YoutubeEmbedr.prototype.addParam = function(key, val) {
+YoutubeEmbedr.prototype.addParams = function(params) {
   // This is a bit tricky, there is always 1 param set,
-  // so I'm just kinda prepending the & here
-  this.params += '&' + key + '=' + val
+  // so I'm just kinda adding the rest. Maybe it's simple...
+  this.params += params
 }
 
 YoutubeEmbedr.prototype.setClick = function() {
@@ -85,6 +107,12 @@ YoutubeEmbedr.prototype.setClick = function() {
   // Sorry Steve W, I'm always gonna use .click!
   this.elem.click(function(e) {
     e.stopPropagation()
+
+    if (mobileBrowser) {
+      window.location = 'https://www.youtube.com/watch?v=' + _this.getId();
+      return false;
+    }
+
     _this.elem.replaceWith(_this.iframeGenerator())
   })
   // Prevent the titlebar from playing the video
