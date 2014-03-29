@@ -1,8 +1,13 @@
 {
   "name": "youtube-embedr",
   "version": "0.0.1",
+  "description": "A youtube embedder, preventing preloading of iframes until the video                   is clicked",
   "engines": {
     "node": ">= 0.10.21"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://paulcarnibella@bitbucket.org/paulcarnibella/yt2.git"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
@@ -20,6 +25,11 @@
     "karma-chrome-launcher": "~0.1.2",
     "karma-ie-launcher": "~0.1.1",
     "karma-firefox-launcher": "~0.1.3",
-    "karma-phantomjs-launcher": "~0.1.1"
-  }
+    "karma-phantomjs-launcher": "~0.1.1",
+    "wd": "~0.2.14",
+    "selenium-standalone": "~2.40.0-2.9.0",
+    "mocha": "~1.18.2"
+  },
+  "author": "Paul Carnibella",
+  "license": "MIT"
 }
