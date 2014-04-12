@@ -143,7 +143,44 @@ module.exports = function(grunt) {
       test: {
         singleRun: true
       }
+    },
+
+
+    // Mocha for the e2e tests
+    mochaTest: {
+      test: {
+        src: ['test/e2e/**/*.js']
+      }
+    },
+
+    wait: {
+      options: {
+        delay: 1000,
+        ready: false
+      },
+      pause: {      
+          options: {
+              before : function(options) {
+                console.log("Waiting for selenium server...")
+              },
+              after : function(options) {
+                var exec = require('child_process').exec,
+                curl = exec('curl -v http://127.0.0.1:4444/wd/hub');
+
+                // Post curl, check the status
+                curl.on('close', function(code) {
+                  options.ready = (code === 0) ? true : false;
+                });
+
+                if (!options.ready) {
+                  return true;
+                }
+                console.log('Selenium server is ready');
+              }
+          }
+      }
     }
+
   });
 
   // These plugins provide necessary tasks.
@@ -156,6 +193,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-wait');
+
+  var selenium;
+  // Start Selenium
+  grunt.registerTask('selenium-start', function() {
+    var spawn = require('child_process').spawn;
+    selenium = spawn('./node_modules/selenium-standalone/bin/start-selenium');
+  })
+
+  // Stop Selenium
+  grunt.registerTask('selenium-stop', function() {
+    selenium.kill();
+  })
 
   // Serve task, for running locally
   grunt.registerTask('serve', [
@@ -167,8 +218,12 @@ module.exports = function(grunt) {
 
   // Test task, for running the tests
   grunt.registerTask('test', [
-    //'jshint',
-    'karma'
+    'jshint',
+    'karma:test',
+    'selenium-start',
+    'wait',
+    'mochaTest',
+    'selenium-stop'
   ]);
 
   // Build task, builds production ready code

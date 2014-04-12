@@ -12,6 +12,7 @@ var wd = require('wd');
 var testTimeout = 10000; // 10 seconds
 var browser;
 
+
 // Before anything, setup the session
 before(function(done) {
   this.timeout(testTimeout);
