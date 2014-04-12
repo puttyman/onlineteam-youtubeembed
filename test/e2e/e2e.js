@@ -29,6 +29,7 @@ after(function(done) {
  * Start the Test suite!
  */
 describe('youtube embedr tests', function() {
+    
     // Start the session
     beforeEach(function(done) {
       browser
@@ -41,6 +42,27 @@ describe('youtube embedr tests', function() {
         .title()
         .then(function(title) {
           expect(title).to.equal('youtube-embedr');
+        })
+        .nodeify(done);
+    });
+
+    it("should have 4 youtube videos", function(done) {
+      browser
+        .elementsByClassName('youtube')
+        .then(function(elements) {
+          expect(elements).to.have.length(4);
+        })
+        .nodeify(done);
+    });
+
+    it("should get one by id", function(done) {
+      browser
+        .elementById('GOtxJrzp6ls')
+        .then(function(element) {
+          return element.getAttribute('id');
+        })
+        .then(function(id) {
+          expect(id).to.equal('GOtxJrzp6ls');
         })
         .nodeify(done);
     });
