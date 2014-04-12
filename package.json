@@ -28,7 +28,8 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "wd": "~0.2.14",
     "selenium-standalone": "~2.40.0-2.9.0",
-    "mocha": "~1.18.2"
+    "mocha": "~1.18.2",
+    "chai-as-promised": "^4.1.1"
   },
   "author": "Paul Carnibella",
   "license": "MIT"

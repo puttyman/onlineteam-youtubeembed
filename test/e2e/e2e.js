@@ -1,6 +1,11 @@
 require('colors');
 var chai = require("chai");
+var chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
 var expect = chai.expect;
+chai.should();
 
 var wd = require('wd');
 
@@ -59,12 +64,8 @@ describe('youtube embedr tests', function() {
       browser
         .elementById('GOtxJrzp6ls')
         .then(function(element) {
-          expect(element.getAttribute('id')).to.become('123');
-          //return element.getAttribute('id');
+          expect(element.getAttribute('id')).to.eventually.equal('123');
         })
-        //.then(function(id) {
-        //  expect(id).to.equal('GOtxJrzp6ls');
-        //})
         .nodeify(done);
     });
 });
