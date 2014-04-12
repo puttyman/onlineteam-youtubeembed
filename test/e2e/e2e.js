@@ -59,11 +59,12 @@ describe('youtube embedr tests', function() {
       browser
         .elementById('GOtxJrzp6ls')
         .then(function(element) {
-          return element.getAttribute('id');
+          expect(element.getAttribute('id')).to.become('123');
+          //return element.getAttribute('id');
         })
-        .then(function(id) {
-          expect(id).to.equal('GOtxJrzp6ls');
-        })
+        //.then(function(id) {
+        //  expect(id).to.equal('GOtxJrzp6ls');
+        //})
         .nodeify(done);
     });
 });
