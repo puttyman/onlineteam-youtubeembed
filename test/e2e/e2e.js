@@ -1,6 +1,6 @@
 require('colors');
 var chai = require("chai");
-chai.should();
+var expect = chai.expect;
 
 var wd = require('wd');
 
@@ -36,7 +36,7 @@ describe('mocha spec examples', function() {
       browser
         .title()
         .then(function(title) {
-          title.should.equal("youtube-embedr");
+          expect(title).to.equal('youtube-embedr');
         })
         .nodeify(done);
     });
