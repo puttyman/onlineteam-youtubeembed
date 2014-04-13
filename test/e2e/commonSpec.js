@@ -138,6 +138,8 @@ describe('Common features', function() {
   });
 
   // This isn't quite right, can't get the click to work
+  // It does load the page (you can check with a sleep)
+  // but the URL is always returned as localhost...
   it("should go to the youtube page when the title is clicked", function(done) {
     browser 
       .elementById(defaultId)
