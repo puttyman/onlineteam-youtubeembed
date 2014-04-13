@@ -42,7 +42,7 @@ describe('youtube embedr tests', function() {
       // Load the page just once
       before(function(done) {
         browser
-          .get("http://localhost:8484/")
+          .get("http://localhost:8485/")
           .nodeify(done);
       })
 
