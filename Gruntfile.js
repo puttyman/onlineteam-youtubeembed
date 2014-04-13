@@ -149,6 +149,9 @@ module.exports = function(grunt) {
     // Mocha for the e2e tests
     mochaTest: {
       test: {
+	options: {
+	  timeout: '5000'
+	},
         src: ['test/e2e/**/*.js']
       }
     },
