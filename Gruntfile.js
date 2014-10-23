@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('youtube-embedr.json'),
     
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n',
+      '<%= grunt.template.today("yyyy-mm-dd") %> */\n\n',
     
     clean: {
       files: ['dist']
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/<%= pkg.name %>.js'],
+        src: ['public/js/<%= pkg.name %>.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
   // Build task, builds production ready code
   grunt.registerTask('build', [
     'jshint',
-    'karma:build',
+    'karma:test',
     'clean',
     'concat',
     'uglify'

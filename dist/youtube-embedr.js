@@ -1,3 +1,5 @@
+/*! youtube-embedr - v0.0.1 - 2014-10-24 */
+
 'use strict';
 
 // Global Strings

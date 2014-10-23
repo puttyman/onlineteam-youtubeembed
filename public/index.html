@@ -46,4 +46,12 @@
   <script src="/js/youtube-embedr.js"></script>
   <!-- livereload script-->
   <script src="//localhost:35729/livereload.js"></script>
+
+  <script>
+    // Dim the lights...iiiiiIIIIIITTT'S TIMMEEEE
+    $.each($('.youtube'), function() {
+      var ytE = new YoutubeEmbedr(this)
+      ytE.run()
+    });
+  </script>
 </body>
