@@ -4,27 +4,16 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    
-
     // Metadata.
     pkg: grunt.file.readJSON('youtube-embedr.json'),
     
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n',
-      //'<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      //'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      //' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     
-
-
-
-    // Task configuration.
     clean: {
       files: ['dist']
     },
 
-
-    // Join the js files
     concat: {
       options: {
         banner: '<%= banner %>',
@@ -36,9 +25,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-
-    // Minify and wrap this sucker
     uglify: {
       options: {
         banner: '<%= banner %>',
@@ -51,10 +37,6 @@ module.exports = function(grunt) {
       }
     },
     
-
-
-
-    // Watch
     watch: {
       options: {
         livereload: true
@@ -79,33 +61,21 @@ module.exports = function(grunt) {
       } 
     },
 
-
-
-    // Connect Server
     connect: {
       options: {
         base: 'public'
       },
       serve: {
         options: {
-	  hostname: '0.0.0.0',
+          hostname: '0.0.0.0',
           port: 8484,
           open: {
             target: 'http://localhost:8484'
-	  }
-        }
-      },
-      test: {
-        options: {
-          port: 8485
+          }
         }
       }
     },
 
-
-
-
-    // Less for the CSS
     less: {
       compile: {
         options: {
@@ -118,8 +88,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-    // Validate our JS YO
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -129,10 +97,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-
-
-    // Karma unit test
     karma: {
       options: {
         configFile: 'karma.conf.js'
@@ -143,47 +107,7 @@ module.exports = function(grunt) {
       test: {
         singleRun: true
       }
-    },
-
-
-    // Mocha for the e2e tests
-    mochaTest: {
-      test: {
-	options: {
-	  timeout: '5000'
-	},
-        src: ['test/e2e/**/*.js']
-      }
-    },
-
-    wait: {
-      options: {
-        delay: 1000,
-        ready: false
-      },
-      pause: {      
-          options: {
-              before : function(options) {
-                console.log("Waiting for selenium server...")
-              },
-              after : function(options) {
-                var exec = require('child_process').exec,
-                curl = exec('curl -v http://127.0.0.1:4444/wd/hub');
-
-                // Post curl, check the status
-                curl.on('close', function(code) {
-                  options.ready = (code === 0) ? true : false;
-                });
-
-                if (!options.ready) {
-                  return true;
-                }
-                console.log('Selenium server is ready');
-              }
-          }
-      }
     }
-
   });
 
   // These plugins provide necessary tasks.
@@ -196,20 +120,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-wait');
-
-  var selenium;
-  // Start Selenium
-  grunt.registerTask('selenium-start', function() {
-    var spawn = require('child_process').spawn;
-    selenium = spawn('./node_modules/selenium-standalone/bin/start-selenium');
-  })
-
-  // Stop Selenium
-  grunt.registerTask('selenium-stop', function() {
-    selenium.kill();
-  })
 
   // Serve task, for running locally
   grunt.registerTask('serve', [
@@ -222,12 +132,7 @@ module.exports = function(grunt) {
   // Test task, for running the tests
   grunt.registerTask('test', [
     'jshint',
-    'karma:test',
-    'connect:test',
-    'selenium-start',
-    'wait',
-    'mochaTest',
-    'selenium-stop'
+    'karma:test'
   ]);
 
   // Build task, builds production ready code
