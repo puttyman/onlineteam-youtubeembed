@@ -29,6 +29,12 @@ var YoutubeEmbedr = function(elem) {
     // TODO - if - else here for custom/default bg
     that.setDefaultBgImage()
     that.addPlayButton()
+
+    if (that.elem.data('fluid')) {
+      $(window).on('resize', function() {
+        that.resize();
+      });
+    }
     
     if (that.hideTitle()) {
       return;
@@ -49,6 +55,11 @@ var YoutubeEmbedr = function(elem) {
         that.setClick()
       })
   } 
+}
+
+YoutubeEmbedr.prototype.resize = function() {
+  var $elem = this.elem;
+  $elem.height($elem.width() * this.ratio[1]/this.ratio[0] + 'px')
 }
 
 YoutubeEmbedr.prototype.hideTitle = function() {
