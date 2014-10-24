@@ -31,7 +31,7 @@ var YoutubeEmbedr = function(elem) {
     // TODO - if - else here for custom/default bg
     that.setDefaultBgImage()
     that.addPlayButton()
-
+    
     if (that.hideTitle()) {
       return;
     }
@@ -41,6 +41,7 @@ var YoutubeEmbedr = function(elem) {
     that.getTitleBarText()
       .then(function(data) {
         that.addTitleBar(data.entry.title.$t)
+        that.elem.find('.play').before(that.elem.find('.text'));
       })
       .fail(function() {
         if (window.console)
