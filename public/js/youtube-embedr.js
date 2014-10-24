@@ -28,9 +28,9 @@ var YoutubeEmbedr = function(elem) {
     _this.setSize()
     // TODO - if - else here for custom/default bg
     _this.setDefaultBgImage()
-    _this.addPlayButton()
-
+    
     if (_this.hideTitle()) {
+      _this.addPlayButton()
       return;
     }
 
@@ -39,6 +39,7 @@ var YoutubeEmbedr = function(elem) {
     _this.getTitleBarText()
       .then(function(data) {
         _this.addTitleBar(data.entry.title.$t)
+        _this.addPlayButton()
       })
       .fail(function() {
         if (window.console)

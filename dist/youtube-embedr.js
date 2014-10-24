@@ -21,33 +21,33 @@ var mobileBrowser = window.navigator.userAgent.match(deviceRegex);
 
 // The YoutubeEmbedr Class
 var YoutubeEmbedr = function(elem) {
-  var _this = this
-  _this.elem = $(elem)
-  _this.params = 'autoplay=1'
-  _this.ratio = [16,9]
+  var that = this
+  that.elem = $(elem)
+  that.params = 'autoplay=1'
+  that.ratio = [16,9]
 
-  _this.run = function() {
-    _this.setSize()
+  that.run = function() {
+    that.setSize()
     // TODO - if - else here for custom/default bg
-    _this.setDefaultBgImage()
-    _this.addPlayButton()
+    that.setDefaultBgImage()
+    that.addPlayButton()
 
-    if (_this.hideTitle()) {
+    if (that.hideTitle()) {
       return;
     }
 
     // TODO - Add custom title here...
 
-    _this.getTitleBarText()
+    that.getTitleBarText()
       .then(function(data) {
-        _this.addTitleBar(data.entry.title.$t)
+        that.addTitleBar(data.entry.title.$t)
       })
       .fail(function() {
         if (window.console)
-          console.error('Error loading youtube title: ' + _this.getId())
+          console.error('Error loading youtube title: ' + that.getId())
       })
       .always(function() {
-        _this.setClick()
+        that.setClick()
       })
   } 
 }
@@ -105,17 +105,17 @@ YoutubeEmbedr.prototype.addParams = function(params) {
 }
 
 YoutubeEmbedr.prototype.setClick = function() {
-  var _this = this
+  var that = this
   // Sorry Steve W, I'm always gonna use .click!
   this.elem.click(function(e) {
     e.stopPropagation()
 
     if (mobileBrowser) {
-      window.location = 'https://www.youtube.com/watch?v=' + _this.getId();
+      window.location = 'https://www.youtube.com/watch?v=' + that.getId();
       return false;
     }
 
-    _this.elem.replaceWith(_this.iframeGenerator())
+    that.elem.replaceWith(that.iframeGenerator())
   })
   // Prevent the titlebar from playing the video
   this.elem.find('.text').click(function(e) {

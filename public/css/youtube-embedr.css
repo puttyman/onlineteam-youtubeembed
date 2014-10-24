@@ -36,6 +36,12 @@
 .youtube .play:hover {
   background-position: 0 -74px;
 }
+.youtube:hover .play {
+  background-position: 0 -74px;
+}
+.youtube .text:hover + .play {
+  background-position: 0 0;
+}
 .youtube a.text {
   display: inline-block;
   top: 0;
