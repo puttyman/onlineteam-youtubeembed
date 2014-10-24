@@ -14,17 +14,6 @@ module.exports = function(grunt) {
       files: ['dist']
     },
 
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['public/js/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
-
     uglify: {
       options: {
         banner: '<%= banner %>',
@@ -32,7 +21,7 @@ module.exports = function(grunt) {
         wrap: true
       },
       dist: {
-        src: '<%= concat.dist.dest %>',
+        src: 'public/js/<%= pkg.name %>.js',
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
@@ -140,7 +129,6 @@ module.exports = function(grunt) {
     'jshint',
     'karma:test',
     'clean',
-    'concat',
     'uglify'
   ]);
 
