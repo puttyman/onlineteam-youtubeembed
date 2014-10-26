@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         wrap: true
       },
       dist: {
-        src: 'public/js/<%= pkg.name %>.js',
+        src: 'gh-pages/js/<%= pkg.name %>.js',
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         files: [
           // includes files within path
           {src: ['<%= uglify.dist.src %>'], dest: 'dist/<%= pkg.name %>.js'},
-          {src: ['public/css/youtube-embedr.css'], dest: 'dist/youtube-embedr.css'},
+          {src: ['gh-pages/css/youtube-embedr.css'], dest: 'dist/youtube-embedr.css'},
         ]
       }
     },
@@ -47,22 +47,22 @@ module.exports = function(grunt) {
       },
 
       html: {
-        files: 'public/*.html',
+        files: 'gh-pages/*.html',
       },
 
       css: {
-        files: 'public/css/**/*.css'
+        files: 'gh-pages/css/**/*.css'
       },
 
       js: {
-        files: 'public/js/**/*.js',
+        files: 'gh-pages/js/**/*.js',
         tasks: ['jshint']
       } 
     },
 
     connect: {
       options: {
-        base: 'public'
+        base: 'gh-pages'
       },
       serve: {
         options: {
@@ -78,16 +78,16 @@ module.exports = function(grunt) {
     less: {
       compile: {
         options: {
-          paths: ['app/less', 'public/css']
+          paths: ['app/less', 'gh-pages/css']
         },
         files: {
-          'public/css/youtube-embedr.css': 'app/less/youtube-embedr.less'
+          'gh-pages/css/youtube-embedr.css': 'app/less/youtube-embedr.less'
         }
       },
 
       build: {
         options: {
-          paths: ['app/less', 'public/css'],
+          paths: ['app/less', 'gh-pages/css'],
           cleancss: true
         },
         files: {
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       js: {
-        src: ['public/js/*.js']
+        src: ['gh-pages/js/*.js']
       }
     },
 
