@@ -50,11 +50,12 @@
   <script>
     // Wrapped in a document ready for some IE8 + respond.js love
     $(document).ready(function() {
+      var ytes = $('.youtube').yt();
       // Dim the lights...iiiiiIIIIIITTT'S TIMMEEEE
-      $.each($('.youtube'), function() {
-        var ytE = new YoutubeEmbedr(this)
-        ytE.run();
-      });
+      // $.each($('.youtube'), function() {
+      //   var ytE = new YoutubeEmbedr(this)
+      //   ytE.run();
+      // });
     });
   </script>
 </body>
