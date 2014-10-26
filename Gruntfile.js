@@ -25,6 +25,16 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
+
+    copy: {
+      build: {
+        files: [
+          // includes files within path
+          {src: ['<%= uglify.dist.src %>'], dest: 'dist/<%= pkg.name %>.js'},
+          {src: ['public/css/youtube-embedr.css'], dest: 'dist/youtube-embedr.css'},
+        ]
+      }
+    },
     
     watch: {
       options: {
@@ -71,8 +81,17 @@ module.exports = function(grunt) {
           paths: ['app/less', 'public/css']
         },
         files: {
-          'public/css/style.css': 'app/less/style.less',
           'public/css/youtube-embedr.css': 'app/less/youtube-embedr.less'
+        }
+      },
+
+      build: {
+        options: {
+          paths: ['app/less', 'public/css'],
+          cleancss: true
+        },
+        files: {
+          'dist/youtube-embedr.min.css': 'app/less/youtube-embedr.less'
         }
       }
     },
@@ -90,9 +109,6 @@ module.exports = function(grunt) {
       options: {
         configFile: 'karma.conf.js'
       },
-      serve: {
-        singleRun: false
-      },
       test: {
         singleRun: true
       }
@@ -101,7 +117,7 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -113,7 +129,7 @@ module.exports = function(grunt) {
   // Serve task, for running locally
   grunt.registerTask('serve', [
     'jshint',
-    'less',
+    'less:compile',
     'connect:serve',
     'watch'
   ]);
@@ -129,6 +145,8 @@ module.exports = function(grunt) {
     'jshint',
     'karma:test',
     'clean',
+    'less:build',
+    'copy:build',
     'uglify'
   ]);
 
