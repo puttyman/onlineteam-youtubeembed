@@ -1,5 +1,5 @@
-youtube-embedr
-==============
+[youtube-embedr](http://myob-technology.github.io/onlineteam-youtubeembed/)
+===========================================================================
 
 A simple little jQuery plugin to set placeholders for youtube videos, which will be replace with an iframe when you click on it.
 
