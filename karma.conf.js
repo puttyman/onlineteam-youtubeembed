@@ -15,8 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'public/bower_components/jquery/dist/jquery.min.js',
-      'public/js/*.js',
+      'gh-pages/bower_components/jquery/dist/jquery.min.js',
+      'gh-pages/js/*.js',
       'test/spec/**/*Spec.js'
     ],
 
