@@ -3,11 +3,9 @@
   <title>youtube-embedr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Bootstrap-->
-  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Page styles-->
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- youtube-embedr -->
-  <link rel="stylesheet" href="/css/youtube-embedr.css">
+  <link rel="stylesheet" href="./css/youtube-embedr.css">
 </head>
 
 <body>
@@ -39,11 +37,11 @@
   </div>
 
   <!-- jQuery-->
-  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap-->
-  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- youtube-embedr -->
-  <script src="/js/youtube-embedr.js"></script>
+  <script src="./js/youtube-embedr.js"></script>
   <!-- livereload script-->
   <script src="//localhost:35729/livereload.js"></script>
 
@@ -51,11 +49,6 @@
     // Wrapped in a document ready for some IE8 + respond.js love
     $(document).ready(function() {
       var ytes = $('.youtube').yt();
-      // Dim the lights...iiiiiIIIIIITTT'S TIMMEEEE
-      // $.each($('.youtube'), function() {
-      //   var ytE = new YoutubeEmbedr(this)
-      //   ytE.run();
-      // });
     });
   </script>
 </body>
