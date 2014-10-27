@@ -27,7 +27,7 @@
   margin-top: -38px;
   left: 50%;
   top: 53%;
-  background: url("http://myob-technology.github.io/onlineteam-youtubeembed/play.png") 0 0 no-repeat;
+  background: url("/play.png") 0 0 no-repeat;
 }
 .youtube .playbackmask {
   width: 100%;
