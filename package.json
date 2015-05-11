@@ -1,6 +1,6 @@
 {
   "name": "youtube-embedr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A youtube embedder, preventing preloading of iframes until the video                   is clicked",
   "engines": {
     "node": ">= 0.10.21"
