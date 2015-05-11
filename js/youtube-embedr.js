@@ -1,5 +1,4 @@
 (function() {
-
   'use strict';
 
   // Global Strings
@@ -38,18 +37,19 @@
       });
     }
     
-    if (that.hideTitle()) {
-      return that;
+    var title = that.showTitle();
+    if (title === '') {
+      that.getTitleBarText()
+        .then(function(data) {
+          that.addTitleBar(data.entry.title.$t)
+          that.elem.find('.play').before(that.elem.find('.text'))
+          that.setClick()
+        })
+    } else if (title) {
+      that.addTitleBar(title)
+      that.elem.find('.play').before(that.elem.find('.text'))
+      that.setClick()
     }
-
-    // TODO - Add custom title here...
-
-    that.getTitleBarText()
-      .then(function(data) {
-        that.addTitleBar(data.entry.title.$t)
-        that.elem.find('.play').before(that.elem.find('.text'))
-        that.setClick()
-      })
 
     return that;
   }
@@ -59,13 +59,23 @@
     $elem.height($elem.width() * this.ratio[1]/this.ratio[0] + 'px')
   }
 
-  YoutubeEmbedr.prototype.hideTitle = function() {
-    if (this.elem.attr('data-title') === 'false') {
+  YoutubeEmbedr.prototype.showTitle = function() {
+    if (this.elem.filter('[data-title]').length === 1) {
+      // Backward compatibilty
+      if (this.elem.attr('data-title') === 'false') {
+        this.setClick();
+        this.elem.find('.play').css('top', '50%')
+        return false;
+      }
+      else if (this.elem.attr('data-title')) {
+        return this.elem.attr('data-title');
+      }
+      return '';
+    } else {
       this.setClick();
       this.elem.find('.play').css('top', '50%')
-      return true;
+      return false;
     }
-    return false;
   }
 
   YoutubeEmbedr.prototype.getId = function() {
