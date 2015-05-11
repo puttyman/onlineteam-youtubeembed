@@ -4,7 +4,7 @@ describe('valid youtube video', function() {
 
   beforeEach(function() {
     youtubeId = '12345';
-    yte = $('<div class="youtube" id="' + youtubeId + '"></div>');
+    yte = $('<div class="youtube" id="' + youtubeId + '" data-title></div>');
     validTitleUrl = 'http://gdata.youtube.com/feeds/api/videos/' + youtubeId + '?v=2&fields=id,title&alt=json'
     
     // Setup AJAX spy
