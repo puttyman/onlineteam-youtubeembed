@@ -60,9 +60,14 @@
   }
 
   YoutubeEmbedr.prototype.showTitle = function() {
-    console.log(this.elem.filter('[data-title]'));
     if (this.elem.filter('[data-title]').length === 1) {
-      if (this.elem.attr('data-title')) {
+      // Backward compatibilty
+      if (this.elem.attr('data-title') === 'false') {
+        this.setClick();
+        this.elem.find('.play').css('top', '50%')
+        return false;
+      }
+      else if (this.elem.attr('data-title')) {
         return this.elem.attr('data-title');
       }
       return '';
