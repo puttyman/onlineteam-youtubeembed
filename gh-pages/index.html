@@ -6,6 +6,8 @@
   <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- youtube-embedr -->
   <link rel="stylesheet" href="./css/youtube-embedr.css">
+  <!-- ekko-lightbox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/3.3.0/ekko-lightbox.css">
 
   <style>
     code {white-space: normal;}
@@ -75,7 +77,7 @@
         <div class="youtube" id="R4ajQ-foj2Q" style="width:100%;" data-fluid="true" data-title></div>
       </div>
     </div>
-    
+
     <!-- Custom Title -->
     <div class="row">
       <div class="col-sm-6 col-xs-12">
@@ -88,7 +90,21 @@
         <div class="youtube" id="R4ajQ-foj2Q" style="width:100%;" data-fluid="true" data-title="I'm custom..."></div>
       </div>
     </div>
-    
+
+    <!-- Lightbox -->
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <h3>Lightbox</h3>
+        <p>Want video to open in a lightbox?</p>
+        <p>Requires ekko-lightbox jQuery plugin.</p>
+        <code>&lt;div class="youtube" id="R4ajQ-foj2Q" style="width:100%;" data-fluid="true" data-toggle="lightbox"&gt;&lt;/div&gt;</code>
+      </div>
+
+      <div class="col-sm-6 col-xs-12">
+        <div class="youtube" id="R4ajQ-foj2Q" style="width:100%;" data-fluid="true" data-toggle="lightbox"></div>
+      </div>
+    </div>
+
 
     <!-- Custom title -->
 
@@ -105,6 +121,8 @@
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- youtube-embedr -->
   <script src="./js/youtube-embedr.js"></script>
+  <!-- ekko-lightbox -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/3.3.0/ekko-lightbox.js"></script>
   <!-- livereload script-->
   <script src="//localhost:35729/livereload.js"></script>
 
