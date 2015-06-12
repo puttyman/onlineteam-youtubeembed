@@ -6,10 +6,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('youtube-embedr.json'),
-    
+
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %> */\n\n',
-    
+
     clean: {
       files: ['dist']
     },
@@ -17,7 +17,9 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '<%= banner %>',
-        mangle: true,
+        mangle: {
+          except: ['dataLayer', 'YoutubeEmbedr']
+        },
         wrap: true
       },
       dist: {
@@ -35,7 +37,7 @@ module.exports = function(grunt) {
         ]
       }
     },
-    
+
     watch: {
       options: {
         livereload: true
@@ -57,7 +59,7 @@ module.exports = function(grunt) {
       js: {
         files: 'gh-pages/js/**/*.js',
         tasks: ['jshint']
-      } 
+      }
     },
 
     connect: {

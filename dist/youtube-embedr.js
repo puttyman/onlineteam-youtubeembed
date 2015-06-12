@@ -18,11 +18,12 @@
   var deviceRegex = /iPhone|iPod|iPad|Android|BlackBerry/i
   var mobileBrowser = window.navigator.userAgent.match(deviceRegex);
 
-  var dataLayer = dataLayer || [];
+
 
   // The YoutubeEmbedr Class
   var YoutubeEmbedr = function(elem) {
     var that = this
+    that.dataLayer = dataLayer || []
     that.elem = $(elem)
     that.params = 'autoplay=1'
     that.ratio = [16,9]
@@ -140,12 +141,12 @@
     this.elem.on('click', function(e) {
       e.stopPropagation()
 
-      dataLayer.push({
+      that.dataLayer.push({
         event: 'videoPlay',
         eventDetails: {
           id: $(e.target).attr('id')
         }
-      });
+      })
 
       if (mobileBrowser) {
         window.location = 'https://www.youtube.com/watch?v=' + that.getId();

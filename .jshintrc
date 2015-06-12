@@ -1,8 +1,9 @@
 {
-  "globals": { 
+  "globals": {
     "$": false,
     "window": false,
-    "document": false
+    "document": false,
+    "dataLayer": false
   },
   "curly": false,
   "eqeqeq": true,

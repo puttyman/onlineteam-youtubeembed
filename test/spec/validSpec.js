@@ -1,3 +1,5 @@
+var dataLayer = [];
+
 describe('valid youtube video', function() {
 
   var youtubeId, yte, $yte, validTitleUrl;
@@ -6,7 +8,7 @@ describe('valid youtube video', function() {
     youtubeId = '12345';
     yte = $('<div class="youtube" id="' + youtubeId + '" data-title></div>');
     validTitleUrl = 'http://gdata.youtube.com/feeds/api/videos/' + youtubeId + '?v=2&fields=id,title&alt=json'
-    
+
     // Setup AJAX spy
     spyOn(jQuery, 'ajax')
       .andCallFake(function(options) {
