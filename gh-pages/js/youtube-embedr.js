@@ -144,7 +144,7 @@
       that.dataLayer.push({
         event: 'videoPlay',
         eventDetails: {
-          id: $(e.target).attr('id')
+          id: that.getId()
         }
       })
 
